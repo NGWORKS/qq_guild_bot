@@ -91,11 +91,25 @@ print(guild_info)
 ```
 id='4930494858376070938' name='机器人禾咕咕' icon=None owner_id='9802601117268679552' owner=False op_user_id=None member_count=24 max_members=1200 description='ng' joined_at=None union_world_id=None union_org_id=None
 ```
+> 百看不如一试，剩下的api你可以在 `test.ipynb` 中交互性的体验！
+
+![在笔记本中交互体验所有api](/img/ex_3.png)
 
 
 ## 更多例子？
-所有api的参考均见 `test.ipynb`
+`所有的API` 参考均见 `test.ipynb`
 
-直接运行 `run.py`
-可以快速观察工作流程
+> 直接运行 `run.py`，可以快速观察工作流程
+
+![效果图](/img/ex_1.jpg)
+
+如果你正确配置机器人并且启动程序，那么恭喜你，你将获得一个笨蛋机器人
+
+> 注意：**发出这段话需要联系qq官方，关闭语料验证**
+
+## 醒目的输出
+
+当然，本项目也有醒目的日志输出，你可以一目了然的观察到目前的状态！
+
+![效果图](/img/ex_2.png)
 
