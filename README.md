@@ -59,17 +59,43 @@ from QQbot import (AudioControl, SendMessage, add_roles_members,
 该接口可以获取当前bot的id、昵称、头像
 
 ```python
-# 查看当前登录用户
 BotInof = getMe()
 print(BotInof)
 ```
-> 返回一个pydantic 对象
+> 返回未经特殊说明均为 `pydantic` 对象
 
+**返回：**
+```
 id='11810040378067637410' username='禾咕咕-测试中' avatar='http://thirdqq.qlogo.cn/g?b=oidb&k=G4icjGB7udGG1TArrwKId1A&s=100&t=1637758329' bot=None union_openid=None union_user_account=None
+```
+#### 查看当前登录BOT加入的频道
+```python
+MeGuilds = getMeGuilds()
+print("加入了频道",len(MeGuilds),"个")
+print(MeGuilds)
+```
+**返回：**
+```
+id='11810040378067637410' username='禾咕咕-测试中' avatar='http://thirdqq.qlogo.cn/g?b=oidb&k=G4icjGB7udGG1TArrwKId1A&s=100&t=1637758329' bot=None union_openid=None union_user_account=None
+```
+### 频道相关
+对频道进行操作
+
+#### 获取指定频道信息
+```python
+guild_info = get_guild_info(4930494858376070938)
+print(guild_info)
+```
+**返回：**
+
+```
+id='4930494858376070938' name='机器人禾咕咕' icon=None owner_id='9802601117268679552' owner=False op_user_id=None member_count=24 max_members=1200 description='ng' joined_at=None union_world_id=None union_org_id=None
+```
+
 
 ## 更多例子？
-所有api的参考均见 test.ipynb
+所有api的参考均见 `test.ipynb`
 
-直接运行 run.py
+直接运行 `run.py`
 可以快速观察工作流程
 
