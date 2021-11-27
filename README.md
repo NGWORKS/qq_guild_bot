@@ -1,12 +1,17 @@
 # 概述
-本库是基于QQ频道机器人而开发的一个`初步封装`了api接口和ws接口，目前可以实现简单的事件监听与交互。
-> 注意 本项目还在开发中 如果您只能在 /hegugu-ng/qq_gulid_bot 仓库看到完整项目时，说明这个项目 **还不能直接用于生产环境！**
+本库是基于QQ频道机器人而开发的一个`初步封装`了api接口和ws接口，目前可以`实现简单的`事件监听与交互。
+
+> **注意:** 本项目还在开发中 如果您只能在 `/hegugu-ng/qq_gulid_bot` 仓库看到完整项目时，说明这个项目 **还不能直接用于生产环境！**
+
+**受限于本人非专业的编码能力，项目中会存在诸多不合理的地方甚至错误的地方，如果您有发现，还望多多指教**
 
 **目前已知的问题：**
 * 全部都用同步写的，没有异步，但多线程
 * 对ws的断开原因没有分析，只会重连
 * 因为懒，完全没有写音频方面
 * 对于发消息因为没有申请ARK能力没有进行测试。
+* 事件绑定的操作比较反人类，但是可以用
+
 ## 谁应该阅读这个文档
 
 开发qq频道机器人的开发者，在阅读文档时应当对机器人的功能与接入方法有一定了解。
@@ -76,7 +81,8 @@ print(MeGuilds)
 ```
 **返回：**
 ```
-id='11810040378067637410' username='禾咕咕-测试中' avatar='http://thirdqq.qlogo.cn/g?b=oidb&k=G4icjGB7udGG1TArrwKId1A&s=100&t=1637758329' bot=None union_openid=None union_user_account=None
+加入了频道 1 个
+[Guild(id='4930494858376070938', name='机器人禾咕咕', icon='https://groupprohead-76292.picgzc.qpic.cn/52603021637757906/100?t=1637757908022', owner_id=None, owner=False, op_user_id=None, member_count=None, max_members=None, description=None, joined_at=None, union_world_id=None, union_org_id=None)]
 ```
 ### 频道相关
 对频道进行操作
@@ -91,6 +97,7 @@ print(guild_info)
 ```
 id='4930494858376070938' name='机器人禾咕咕' icon=None owner_id='9802601117268679552' owner=False op_user_id=None member_count=24 max_members=1200 description='ng' joined_at=None union_world_id=None union_org_id=None
 ```
+
 > 百看不如一试，剩下的api你可以在 `test.ipynb` 中交互性的体验！
 
 ![在笔记本中交互体验所有api](/img/ex_3.png)
