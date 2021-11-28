@@ -223,11 +223,34 @@ getWss()
 
 
 
-## 交互式的调试api？
+### 交互式的调试api？
 
 > 百看不如一试，剩下的api你可以在 `test.ipynb` 中交互性的体验！
 
 ![在笔记本中交互体验所有api](/img/ex_3.png)
+
+## 使用ws
+本项目也为仅单独使用ws提供了便利，你可以参考一下方式进行使用
+```python
+from QQbot import BOT
+
+bot = BOT()
+bot.ListenerImport()
+
+# 实例化ws
+ws = bot.wsc(
+    # 传入url
+    url= 'wss://api.sgroup.qq.com/websocket',
+    # 传入token
+    token= bot.token,
+    # 导入事件响应器
+    eventManager=bot.eventManager,
+    # 分片
+    shard=[0, 1])
+
+# ws启动
+ws.run()
+```
 
 
 ## 更多例子？
