@@ -30,6 +30,7 @@ python 3.6 +
 pip install pydantic
 pip install requests
 pip install websocket-client
+pip install colorlog
 ```
 ## 使用
 **填写自己的bot信息**
@@ -98,6 +99,126 @@ print(guild_info)
 ```
 id='4930494858376070938' name='机器人禾咕咕' icon=None owner_id='9802601117268679552' owner=False op_user_id=None member_count=24 max_members=1200 description='ng' joined_at=None union_world_id=None union_org_id=None
 ```
+#### 获取指定频道身份组
+```python
+roleslist = get_roles(4930494858376070938)
+print(roleslist)
+```
+**返回：**
+```
+guild_id='4930494858376070938' roles=[Role(id='4', name='创建者', color=4294927682, hoist=1, number=1, member_limit=1), Role(id='2', name='管理员', color=4280276644, hoist=1, number=5, member_limit=50), Role(id='5', name='子频道管理员', color=4282814975, hoist=1, number=0, member_limit=50), Role(id='10030939', name='万能的bot', color=4285110493, hoist=0, number=1, member_limit=2000), Role(id='10037002', name='测试', color=4285110493, hoist=0, number=0, member_limit=2000), Role(id='1', name='普通成员', color=4286151052, hoist=0, number=0, member_limit=1000)] role_num_limit='30'
+```
+#### 获取一个频道下的所有子频道
+```python
+all_channel = get_guilds_all_channel(4930494858376070938)
+print(all_channel)
+```
+**返回：**
+
+```
+[Channel(id='1592769', guild_id='4930494858376070938', name='bot试炼场', type=4, sub_type=0, position=5, parent_id='0', owner_id='0'), Channel(id='1592782', guild_id='4930494858376070938', name='新功能孵化器', type=4, sub_type=0, position=6, parent_id='0', owner_id='0'), Channel(id='1554677', guild_id='4930494858376070938', name='很高兴遇见你', type=4, sub_type=0, position=2, parent_id='0', owner_id='0'), Channel(id='1554678', guild_id='4930494858376070938', name='话题讨论', type=4, sub_type=0, position=3, parent_id='0', owner_id='0'), Channel(id='1554680', guild_id='4930494858376070938', name='频道管理', type=4, sub_type=0, position=4, parent_id='0', owner_id='0'), Channel(id='1554681', guild_id='4930494858376070938', name='', type=4, sub_type=0, position=1, parent_id='0', owner_id='0'), Channel(id='1587214', guild_id='4930494858376070938', name='botの奇妙发言', type=0, sub_type=0, position=2, parent_id='1592769', owner_id='0'), Channel(id='1592778', guild_id='4930494858376070938', name='功能更新日历', type=10006, sub_type=0, position=1, parent_id='1592782', owner_id='0'), Channel(id='1554672', guild_id='4930494858376070938', name='😃闲聊大厅', type=0, sub_type=0, position=2, parent_id='1554678', owner_id='0'), Channel(id='1554675', guild_id='4930494858376070938', name='🔒管理员议事厅', type=0, sub_type=0, position=1, parent_id='1554680', owner_id='0'), Channel(id='1555076', guild_id='4930494858376070938', name='机器人测试', type=0, sub_type=0, position=1, parent_id='1592769', owner_id='0'), Channel(id='1554676', guild_id='4930494858376070938', name='🚪小黑屋', type=0, sub_type=0, position=2, parent_id='1554680', owner_id='0'), Channel(id='1592779', guild_id='4930494858376070938', name='产品锦鲤大投票', type=10006, sub_type=0, position=2, parent_id='1592782', owner_id='0'), Channel(id='1592790', guild_id='4930494858376070938', name='建议', type=10007, sub_type=0, position=1, parent_id='1554681', owner_id='0'), Channel(id='1554668', guild_id='4930494858376070938', name='📝重要通知', type=0, sub_type=1, position=1, parent_id='1554677', owner_id='0'), Channel(id='1554670', guild_id='4930494858376070938', name='🧐今日大事', type=0, sub_type=2, position=2, parent_id='1554677', owner_id='0'), Channel(id='1554671', guild_id='4930494858376070938', name='🥳欢迎萌新', type=0, sub_type=0, position=1, parent_id='1554678', owner_id='0')]
+```
+
+#### 获取指定子频道信息
+```python
+channel_info = get_channel(1554668)
+print(channel_info)
+```
+**返回：**
+```
+id='1554668' guild_id='4930494858376070938' name='📝重要通知' type=0 sub_type=1 position=2 parent_id='1554677' owner_id='0'
+```
+### 身份组相关
+#### 新建身份组
+身份组操作需要导入  `Filter` 与 `Info` 两个类，本示例只导入一次供参考，其余部分视为已经导入
+```python
+from QQbot import Filter,Info
+filter = Filter(name=1,color=1,hoist=1)
+info = Info(name="BOT钦定~",color=4285110493,hoist=1)
+new_roles = establish_roles(guild_id=4930494858376070938,filter=filter,info=info)
+new_roles_id = new_roles.role_id
+print(new_roles)
+```
+**返回：**
+
+```
+role_id='10037579'
+```
+
+#### 修改身份组
+```python
+new_info = Info(name="BOT在修改~",color=4285110493,hoist=1)
+modify_roles(guild_id=4930494858376070938,role_id=new_roles_id,filter=filter,info=new_info)
+```
+**返回：**
+
+```
+role_and_guild_id(guild_id='4930494858376070938', role_id='10037579')
+```
+#### 删除身份组
+```python
+delete_roles(guild_id=4930494858376070938,role_id=new_roles_id)
+```
+
+**返回：**
+布尔值
+
+```
+True
+```
+#### 查询成员在频道中的身份组
+```python
+get_memder(guild_id=4930494858376070938,user_id=11810040378067637410)
+```
+**返回：**
+
+```
+Member(user=User(id='11810040378067637410', username='禾咕咕-测试中', avatar='http://thirdqq.qlogo.cn/g?b=oidb&k=G4icjGB7udGG1TArrwKId1A&s=100&t=1637758329', bot=True, union_openid=None, union_user_account=None), nick='', roles=['1'], joined_at='2021-11-24T20:56:18+08:00')
+```
+#### 将指定成员移动到指定身份组
+```python
+add_roles_members(guild_id=4930494858376070938,user_id=11810040378067637410,role_id=10030939)
+```
+**返回：**
+布尔值
+
+```
+True
+```
+#### 将指定成员从指定身份组中移除
+```python
+delete_roles_members(guild_id=4930494858376070938,user_id=11810040378067637410,role_id=10030939)
+```
+**返回：**
+布尔值
+
+```
+True
+```
+### ws网关相关
+#### 获取ws地址时返回分片信息与限制信息
+```python
+shardsWss()
+```
+**返回：**
+```
+Shards(url='wss://api.sgroup.qq.com/websocket', shards=1, session_start_limit=SessionStartLimit(total=1000, remaining=993, reset_after=82975041, max_concurrency=1))
+```
+#### 获取ws地址
+```python
+getWss()
+```
+**返回：**
+字符串
+```
+'wss://api.sgroup.qq.com/websocket'
+```
+### 发送消息
+> **注意：** 本功能还在开发中，暂无文档支持，您可以先行参考 `test.ipynb`
+
+
+
+## 交互式的调试api？
 
 > 百看不如一试，剩下的api你可以在 `test.ipynb` 中交互性的体验！
 
