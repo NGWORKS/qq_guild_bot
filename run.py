@@ -8,7 +8,6 @@ bot.ListenerImport()
 bot.run_ws()
 bot.tasksDocter()
 
-from functools import partial
  
 def myfunc1(event):
     # print(event)
